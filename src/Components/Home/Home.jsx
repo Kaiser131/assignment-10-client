@@ -4,6 +4,7 @@ import Carousel from "./Carousel/Carousel";
 import Destination from "./Destination/Destination";
 import NewsLetter from "./NewsLetter/NewsLetter";
 import Recent from "./Recent/Recent";
+import Team from "./Team/Team";
 
 const Home = () => {
     return (
@@ -15,6 +16,7 @@ const Home = () => {
             <Album></Album>
             <Recent></Recent>
             <NewsLetter></NewsLetter>
+            <Team></Team>
 
         </div>
     );
