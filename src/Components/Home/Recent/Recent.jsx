@@ -37,11 +37,7 @@ const Recent = () => {
 
                         {cuttedArticle.map((got) => <div key={got.id}>
                             <div className="relative">
-                                <img
-                                    className="object-cover object-center w-full h-64 rounded-lg lg:h-80"
-                                    src="https://images.unsplash.com/photo-1624996379697-f01d168b1a52?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80"
-                                    alt=""
-                                />
+                                <img className="object-cover object-center w-full h-64 rounded-lg lg:h-80" src={got.image} alt="" />
 
                                 <div className="absolute bottom-0 flex p-3 bg-white dark:bg-gray-900">
                                     <img
