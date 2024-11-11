@@ -9,6 +9,7 @@ import {
 import Root from './Routes/Root/Root';
 import Error from './Components/Error/Error';
 import Home from './Components/Home/Home';
+import RecentDetails from './Components/Home/Recent/RecentDetails';
 
 
 const router = createBrowserRouter([
@@ -20,6 +21,11 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home></Home>
+      },
+      {
+        path: '/article/:id',
+        element: <RecentDetails></RecentDetails>,
+        loader: ({ params }) => fetch('http://localhost:5000/article')
       }
     ]
   },
