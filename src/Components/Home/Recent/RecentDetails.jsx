@@ -22,8 +22,6 @@ const RecentDetails = () => {
                 </div>
             </div>
 
-
-
         </div>
     );
 };
