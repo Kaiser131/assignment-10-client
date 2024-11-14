@@ -18,6 +18,7 @@ import NetherLands from './Components/Home/Countries/NetherLand/NetherLands';
 import SwitzerLands from './Components/Home/Countries/SwitzerLand/SwitzerLands';
 import AddTravels from './Components/AddTravels/AddTravels/AddTravels';
 import TouristAdmin from './Components/TouristAdmin/TouristAdmin/TouristAdmin';
+import UpdateTravels from './Components/AddTravels/UpdateTravels/UpdateTravels';
 
 
 const router = createBrowserRouter([
@@ -62,6 +63,11 @@ const router = createBrowserRouter([
       {
         path: '/addTravels',
         element: <AddTravels></AddTravels>
+      },
+      {
+        path: '/updateTravels/:id',
+        element: <UpdateTravels></UpdateTravels>,
+        loader: ({ params }) => fetch(`http://localhost:5000/spots/${params.id}`)
       },
       {
         path: '/tourismAdmin',

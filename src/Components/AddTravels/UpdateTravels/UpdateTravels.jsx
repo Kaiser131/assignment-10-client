@@ -1,11 +1,12 @@
+import { useLoaderData } from "react-router-dom";
 
-const AddTravels = () => {
+const UpdateTravels = () => {
 
+    const { _id, spotCost, spotCountry, spotDescription, spotImage, spotLocation, spotName, spotSeason, spotTime, spotVisitor } = useLoaderData();
 
-    const handleAddTravelsData = e => {
+    const handleUpdateTravelsData = (e) => {
         e.preventDefault();
         const form = e.target;
-
         const spotImage = form.spotImage.value;
         const spotName = form.spotName.value;
         const spotCountry = form.spotCountry.value;
@@ -16,26 +17,23 @@ const AddTravels = () => {
         const spotTime = form.spotTime.value;
         const spotVisitor = form.spotVisitor.value;
 
-        const addData = { spotCost, spotCountry, spotDescription, spotImage, spotLocation, spotName, spotSeason, spotTime, spotVisitor };
+        const updatedData = { spotCost, spotCountry, spotDescription, spotImage, spotLocation, spotName, spotSeason, spotTime, spotVisitor };
 
-        console.log(spotImage, spotName, spotCountry, spotLocation, spotDescription, spotCost, spotSeason, spotTime, spotVisitor);
-
-        fetch('http://localhost:5000/spots', {
-            method: "POST",
+        fetch(`http://localhost:5000/spots/${_id}`, {
+            method: "PUT",
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(addData)
+            body: JSON.stringify(updatedData)
         })
             .then(res => res.json())
             .then(data => {
                 console.log(data);
-                if (data.acknowledged) {
+                if (data.modifiedCount > 0) {
                     alert('Successful');
                     form.reset();
                 }
             });
-
 
 
     };
@@ -47,10 +45,11 @@ const AddTravels = () => {
             <div className="max-w-6xl mx-auto">
                 <div className="text-center space-y-5">
                     <h1 className="text-5xl">Admin</h1>
-                    <p className="text-2xl">Upload a new Tourism Data</p>
+                    <p className="text-2xl">Update The Tourism Data</p>
+                    <p className="text-xl text-blue-500">{spotName}</p>
                 </div>
 
-                <form onSubmit={handleAddTravelsData}>
+                <form onSubmit={handleUpdateTravelsData}>
 
                     {/* Image */}
                     <div className="space-y-4 my-8">
@@ -60,6 +59,7 @@ const AddTravels = () => {
                                 <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Image URL</label>
                                 <input
                                     name="spotImage"
+                                    defaultValue={spotImage}
                                     required
                                     type="text"
                                     placeholder="example.com"
@@ -87,6 +87,7 @@ const AddTravels = () => {
                                 <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Tourist Spot Name</label>
                                 <input
                                     name="spotName"
+                                    defaultValue={spotName}
                                     required
                                     type="text"
                                     placeholder="name..."
@@ -98,10 +99,11 @@ const AddTravels = () => {
                                 <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Country Name</label>
                                 <input
                                     name="spotCountry"
+                                    defaultValue={spotCountry}
                                     required
                                     type="text"
                                     placeholder="country..."
-                                    className="lowercase mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+                                    className="uppercase mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
                                 />
                             </div>
 
@@ -114,10 +116,11 @@ const AddTravels = () => {
                             <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Location</label>
                             <input
                                 name="spotLocation"
+                                defaultValue={spotLocation}
                                 required
                                 type="text"
                                 placeholder="Location..."
-                                className="lowercase mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
+                                className="capitalize mt-2 block w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
                             />
                         </div>
 
@@ -126,6 +129,7 @@ const AddTravels = () => {
 
                             <textarea
                                 name="spotDescription"
+                                defaultValue={spotDescription}
                                 required
                                 placeholder="Information..."
                                 className="block mt-2 w-full placeholder-gray-400/70 dark:placeholder-gray-500 rounded-lg border border-gray-200 bg-white px-4 h-32 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40 dark:border-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:focus:border-blue-300"
@@ -145,6 +149,7 @@ const AddTravels = () => {
                                 <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Average Cost</label>
                                 <input
                                     name="spotCost"
+                                    defaultValue={spotCost}
                                     required
                                     type="number"
                                     placeholder="cost..."
@@ -156,6 +161,7 @@ const AddTravels = () => {
                                 <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Seasonality</label>
                                 <input
                                     name="spotSeason"
+                                    defaultValue={spotSeason}
                                     required
                                     type="text"
                                     placeholder="season..."
@@ -167,6 +173,7 @@ const AddTravels = () => {
                                 <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Travel Time</label>
                                 <input
                                     name="spotTime"
+                                    defaultValue={spotTime}
                                     required
                                     type="text"
                                     placeholder="time..."
@@ -178,6 +185,7 @@ const AddTravels = () => {
                                 <label htmlFor="email" className="block text-sm text-gray-500 dark:text-gray-300">Total Visitor per...</label>
                                 <input
                                     name="spotVisitor"
+                                    defaultValue={spotVisitor}
                                     required
                                     type="text"
                                     placeholder="year..."
@@ -189,7 +197,7 @@ const AddTravels = () => {
                     </div>
 
                     <div className="flex justify-center mt-20">
-                        <input className="btn btn-outline px-10" type="submit" value="Add" />
+                        <input className="btn btn-outline px-10" type="submit" value="Update" />
                     </div>
 
                 </form>
@@ -200,4 +208,4 @@ const AddTravels = () => {
     );
 };
 
-export default AddTravels;
+export default UpdateTravels;
