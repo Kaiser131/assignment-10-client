@@ -17,6 +17,7 @@ import Englands from './Components/Home/Countries/England/Englands';
 import NetherLands from './Components/Home/Countries/NetherLand/NetherLands';
 import SwitzerLands from './Components/Home/Countries/SwitzerLand/SwitzerLands';
 import AddTravels from './Components/AddTravels/AddTravels/AddTravels';
+import TouristAdmin from './Components/TouristAdmin/TouristAdmin/TouristAdmin';
 
 
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
       {
         path: '/addTravels',
         element: <AddTravels></AddTravels>
+      },
+      {
+        path: '/tourismAdmin',
+        element: <TouristAdmin></TouristAdmin>
       }
     ]
   },
